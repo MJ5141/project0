@@ -1,9 +1,8 @@
-window.onload = function(){                                      // Code. . .
+window.onload = function(){                                            // Code
 
+let turn= "X"                                   //to set if X's turn or O's turn
 
-  let turn= "X"                                   //to set if X's turn or O's turn
-
-  const winningCombinations = [               // all possible win combinations
+const winningCombinations = [                  // all possible win combinations
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -14,79 +13,107 @@ window.onload = function(){                                      // Code. . .
     [2, 4, 6]
   ]
 
-  const allDiv= document.querySelectorAll('[data-cell]');
+const allDiv= document.querySelectorAll('[data-cell]');
 
-  const newGameButton= document.getElementById("restartButton");
+const newGameButton= document.getElementById("restartButton");
 
+                                                    // to restart game on click
+  let newGame= function () {
 
-
-  let newGame= function () {                         // to restart game on click
     let sqrElementArray = document.getElementsByClassName("cell");
-
-    [...sqrElementArray].forEach((item) => {  // to convert type from obj to array
-      item.innerHTML= ""                                 // to empty all squares
+                                         // / to convert type from obj to array
+    [...sqrElementArray].forEach((item) => {
+      item.innerHTML= ""
     });
   }
+
   newGameButton.addEventListener('click', newGame);
 
 
 
-  let currentMoves = [                     // to store indices of current moves
+  let currentMoves = [                      // to store indices of current moves
     '', '', '',
     '', '', '',
     '', '', ''
   ];
-  console.log(currentMoves);
 
-  const setChoice= function (grid){                   // to swap turns from X to O
+  const setChoice= function (grid){                 // to swap turns from X to O
 
     if (turn == "X"){
-      // console.log("turn is x");
       grid.innerHTML="X"
       turn = "O"
       currentMoves[grid.id]="X"
       checkWin();
-    } else {
-      // console.log("turn is o");
+    }
+    else {
       grid.innerHTML="O"
       currentMoves[grid.id]="O"
       turn= "X"
       checkWin();
     }
 
+
+  let drawValue = isDraw();
+
+    if ( drawValue == true) {
+
+      let drawMessage= document.getElementById("winningMessage")
+      drawMessage.innerHTML="☹️ draw ☹️";
+
+      drawMessage.classList.add("show");
+
+      setTimeout(function(){drawMessage.classList.remove("show"); window.location.reload();}, 3000);
+    }
   };
 
+                                         // itteration through win combinations
+  const checkWin = function(){
 
-  const checkWin = function(){            // itteration through win combinations
     for(let i=0; i<winningCombinations.length; i++){
-      // console.log(winningCombinations[i][0]);
 
       if (currentMoves[winningCombinations[i][0]] === "X" && currentMoves[winningCombinations[i][1]] === "X" && currentMoves[winningCombinations[i][2]] === "X") {
-        console.log('X wins');
+
+
       let winMessage=  document.getElementById('winningMessage')
-      winMessage.innerHTML="X wins";
-      console.log(winMessage);
+      winMessage.innerHTML="The game goes to X 👑";
+
       winMessage.classList.add("show");
-        setTimeout(function(){ winMessage.classList.remove("show"); window.location.reload(); }, 3000);
+
+      setTimeout(function(){ winMessage.classList.remove("show"); window.location.reload(); }, 3000);
       }
     }
 
     for(let i=0; i<winningCombinations.length; i++){
-      // console.log(winningCombinations[i][0]);
 
       if (currentMoves[winningCombinations[i][0]] === "O" && currentMoves[winningCombinations[i][1]] === "O" && currentMoves[winningCombinations[i][2]] === "O") {
-        console.log('o wins');
-        let winMessage=  document.getElementById('winningMessage')
-        winMessage.innerHTML="O wins";
-        console.log(winMessage);
-        winMessage.classList.add("show");
-          setTimeout(function(){ winMessage.classList.remove("show"); window.location.reload(); }, 3000);
+
+
+      let winMessage=  document.getElementById('winningMessage')
+      winMessage.innerHTML="The game goes to O 👑";
+
+      winMessage.classList.add("show");
+
+      setTimeout(function(){ winMessage.classList.remove("show"); window.location.reload(); }, 3000);
       }
     }
 
   }
 
+    const isDraw= function (){
+
+    let checkDraw = true;
+      allDiv.forEach((item, i) => {
+
+    if (item.innerHTML != "X" && item.innerHTML != "O") {
+      checkDraw = false;
+    }
+  });
+
+  return checkDraw
+};
+
+
   Array.from(allDiv).forEach((div, i) => {
-    div.addEventListener('click',setChoice.bind(event,div), {once: true});
+  div.addEventListener('click',setChoice.bind(event,div), {once: true});
   });
 }
