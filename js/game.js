@@ -58,7 +58,7 @@ const newGameButton= document.getElementById("restartButton");
     if ( drawValue == true) {
 
       let drawMessage= document.getElementById("winningMessage")
-      drawMessage.innerHTML="☹️ draw ☹️";
+      drawMessage.innerHTML="Tough game! It's a draw ☹️";
 
       drawMessage.classList.add("show");
 
@@ -112,7 +112,7 @@ const newGameButton= document.getElementById("restartButton");
   return checkDraw
 };
 
-
+                                                //  event listener to swap turns
   Array.from(allDiv).forEach((div, i) => {
   div.addEventListener('click',setChoice.bind(event,div), {once: true});
   });

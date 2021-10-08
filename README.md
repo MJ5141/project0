@@ -31,6 +31,12 @@ Tic-tac-toe is a simple, two-player game that, if played optimally by both playe
 * Advance styling
 * DRY principles
 
+## Things to add in future
+
+* Add score board
+* Create best of "n numbers of game"
+* Add names and emojis
+
 ## Game rules
 
 * The game is played on a grid that's 3 squares by 3 squares.
@@ -38,4 +44,7 @@ Tic-tac-toe is a simple, two-player game that, if played optimally by both playe
 * The first player to get 3 marks in a row (up, down, across, or diagonally) is the winner.
 * When all 9 squares are full, the game is over.
 
-  ## Good Luck 👍🏻  Have fun 🥳
+## Special Thanks
+* Joel, Pat & Ro you are superstars!
+### [Let's get started!](https://mj5141.github.io/project0/)
+## Good Luck 👍🏻  Have fun 🥳
